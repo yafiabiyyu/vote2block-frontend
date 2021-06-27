@@ -12,6 +12,7 @@ const DataPemilih = () => import('@/views/admin/Pemilih/DataPemilih')
 const DetailPemilih = () => import('@/views/admin/Pemilih/DetailPemilih')
 const PendaftaranPemilih = () => import('@/views/admin/Pemilih/PendaftaranPemilih')
 const DataKandidat = () => import('@/views/admin/Kandidat/DataKandidat')
+const PendaftaranKandidat = () => import('@/views/admin/Kandidat/PendaftaranKandidat')
 
 // Pemilih Views
 const PemilihLogin = () => import('@/views/pemilih/LoginForm')
@@ -103,6 +104,11 @@ function configRoutes () {
               path:'data',
               name:'Data',
               component:DataKandidat
+            },
+            {
+              path:'pendaftaran',
+              name:'Pendaftaran',
+              component:PendaftaranKandidat
             }
           ]
         }

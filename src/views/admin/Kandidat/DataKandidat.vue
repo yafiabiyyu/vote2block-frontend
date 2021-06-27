@@ -63,7 +63,7 @@
 				this.$route.push({ query: { page: val } });
 			},
 			registerButton:function(event){
-				this.$router.push({path:'/admin/pemilih/daftar'});
+				this.$router.push({path:'/admin/kandidat/pendaftaran'});
 			}
 		}
 	};
