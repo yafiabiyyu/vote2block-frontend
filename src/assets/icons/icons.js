@@ -4,6 +4,7 @@ import {
   cibLinkedin,
   cibFlickr,
   cibTumblr,
+  cibEthereum,
   cibXing,
   cibGithub,
   cibStackoverflow,
@@ -33,6 +34,7 @@ import {
 } from '@coreui/icons'
 import {
   cilArrowRight,
+  cilSettings,
   cilBan,
   cilBasket,
   cilBell,
@@ -69,7 +71,6 @@ import {
   cilPencil,
   cilPeople,
   cilPuzzle,
-  cilSettings,
   cilShieldAlt,
   cilSpeech,
   cilSpeedometer,
@@ -145,6 +146,7 @@ export const iconsSet = Object.assign(
   },
   {
     cibFacebook,
+    cibEthereum,
     cibTwitter,
     cibLinkedin,
     cibFlickr,
