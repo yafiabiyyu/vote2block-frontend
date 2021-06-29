@@ -57,7 +57,7 @@
 		},
 		methods: {
 			rowClicked(item) {
-				this.$router.push({ path: `/admin/pemilih/detail/${item.id}` });
+				this.$router.push({ path: `/admin/kandidat/detail/${item.id}` });
 			},
 			pageChange(val) {
 				this.$route.push({ query: { page: val } });

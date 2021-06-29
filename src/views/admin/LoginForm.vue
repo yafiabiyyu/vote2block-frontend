@@ -6,22 +6,33 @@
 					<CCardGroup>
 						<CCard class="p-4">
 							<CCardBody>
-								<CForm>
+								<CForm @submit.prevent="handleLogin">
 									<h1>Admin Login</h1>
-									<p class="text-muted">Sign In to your account</p>
-									<CInput placeholder="Username" autocomplete="username email">
+									<CInput
+										placeholder="Username"
+										v-model="user.username"
+										autocomplete="username email"
+										required
+										was-validated
+									>
 										<template #prepend-content>
 											<CIcon name="cil-user" />
 										</template>
 									</CInput>
-									<CInput placeholder="Password" type="password" autocomplete="curent-password">
+									<CInput
+										placeholder="Password"
+										v-model="user.password"
+										type="password"
+										required
+										was-validated
+									>
 										<template #prepend-content>
 											<CIcon name="cil-lock-locked" />
 										</template>
 									</CInput>
 									<CRow>
 										<CCol col="6" class="text-left">
-											<CButton color="primary" class="px-4">Login</CButton>
+											<CButton color="primary" type="submit" class="px-4">Login</CButton>
 										</CCol>
 									</CRow>
 								</CForm>
@@ -35,7 +46,9 @@
 						>
 							<CCardBody>
 								<h2>Vote2Block</h2>
-								<p style="text-align='center'">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dignissimos enim quisquam velit, eum blanditiis, quasi laudantium illo odit asperiores recusandae expedita, laborum quaerat maxime?</p>
+								<p
+									style="text-align='center'"
+								>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dignissimos enim quisquam velit, eum blanditiis, quasi laudantium illo odit asperiores recusandae expedita, laborum quaerat maxime?</p>
 							</CCardBody>
 						</CCard>
 					</CCardGroup>
@@ -46,7 +59,32 @@
 </template>
 
 <script>
+	import User from "../../model/user";
 	export default {
-		name: "Login"
+		name: "Login",
+		data() {
+			return {
+				user: new User("", ""),
+				loading: false,
+				message: ""
+			};
+		},
+		computed: {
+			loggedIn() {
+				return this.$store.state.auth.status.loggedIn;
+			}
+		},
+		created() {
+			if (this.loggedIn) {
+				this.$router.push("/admin");
+			}
+		},
+		methods: {
+			handleLogin() {
+				this.$store.dispatch("auth/login", this.user).then(() => {
+					this.$router.push("/admin");
+				});
+			}
+		}
 	};
 </script>

@@ -14,7 +14,7 @@
 				</CCol>
 				<CCol sm="6" md="4" class="py-3 px-lg-5">
 					<CWidgetProgressIcon header="10" text="Ethereum Balance" color="gradient-danger" inverse>
-						<CIcon name="cil-wallet" height="36" />
+						<CIcon name="cib-ethereum" height="36" />
 					</CWidgetProgressIcon>
 				</CCol>
 			</CRow>
