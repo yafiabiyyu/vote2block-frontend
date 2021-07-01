@@ -24,6 +24,10 @@ export const auth = {
         logout({ commit }){
             AdminAuth.logout();
             commit('logout');
+        },
+        removeAuth({ commit }){
+            AdminAuth.removeAuth();
+            commit('removeauth')
         }
     },
     mutations:{
@@ -36,6 +40,10 @@ export const auth = {
             status.user = null;
         },
         logout(state){
+            state.status.loggedIn = false;
+            state.user = null;
+        },
+        removeauth(state){
             state.status.loggedIn = false;
             state.user = null;
         }

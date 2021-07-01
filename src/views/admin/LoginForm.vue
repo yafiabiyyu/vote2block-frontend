@@ -60,23 +60,31 @@
 
 <script>
 	import User from "../../model/user";
+	import EthereumService from "../../service/admin/ethereum.service";
 	export default {
 		name: "Login",
 		data() {
 			return {
 				user: new User("", ""),
-				loading: false,
-				message: ""
+				activeUser:{
+					activeHash:"",
+					generateHash:""
+				}
 			};
 		},
 		computed: {
 			loggedIn() {
 				return this.$store.state.auth.status.loggedIn;
+			},
+			VerifyUser(){
+				return EthereumService.verifyUser();
 			}
 		},
-		created() {
-			if (this.loggedIn) {
-				this.$router.push("/admin");
+		mounted() {
+			if (this.loggedIn && this.VerifyUser) {
+				setTimeout(() => this.$router.push('/admin'), 7000);
+			}else{
+				setTimeout(() => this.$router.push('/'),7000)
 			}
 		},
 		methods: {
