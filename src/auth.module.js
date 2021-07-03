@@ -20,14 +20,6 @@ export const auth = {
                     return Promise.reject(error);
                 }
             )
-        },
-        logout({ commit }){
-            AdminAuth.logout();
-            commit('logout');
-        },
-        removeAuth({ commit }){
-            AdminAuth.removeAuth();
-            commit('removeauth')
         }
     },
     mutations:{
@@ -35,15 +27,7 @@ export const auth = {
             state.status.loggedIn = true;
             state.user = user;
         },
-        loginFailur(state) {
-            state.status.loggedIn = false;
-            status.user = null;
-        },
-        logout(state){
-            state.status.loggedIn = false;
-            state.user = null;
-        },
-        removeauth(state){
+        loginFailur(state){
             state.status.loggedIn = false;
             state.user = null;
         }
