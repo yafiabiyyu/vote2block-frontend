@@ -6,30 +6,38 @@ const initialState = user
     : { status: { loggedIn: false }, user: null };
 
 export const auth = {
-    namespaced:true,
-    state:initialState,
-    actions:{
+    namespaced: true,
+    state: initialState,
+    actions: {
         login({ commit }, user) {
             return AdminAuth.login(user).then(
-                user => {
-                    commit('loginSuccess', user);
+                (user) => {
+                    commit("loginSuccess", user);
                     return Promise.resolve(user);
                 },
-                error => {
-                    commit('loginFailur');
+                (error) => {
+                    commit("loginFailur");
                     return Promise.reject(error);
                 }
-            )
-        }
+            );
+        },
+        removeauth({ commit }) {
+            AdminAuth.removeAuth();
+            commit("removeAuth");
+        },
     },
-    mutations:{
-        loginSuccess(state, user){
+    mutations: {
+        loginSuccess(state, user) {
             state.status.loggedIn = true;
             state.user = user;
         },
-        loginFailur(state){
+        loginFailur(state) {
             state.status.loggedIn = false;
             state.user = null;
-        }
-    }
-}
+        },
+        removeAuth(state) {
+            state.status.loggedIn = false;
+            state.user = null;
+        },
+    },
+};

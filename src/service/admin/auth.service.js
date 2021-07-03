@@ -30,6 +30,12 @@ class AdminAuth {
                 return response.data;
             });
     }
+    // Menghapus auth data dari localStorage ketika sesi telah berakhir
+    removeAuth() {
+        localStorage.removeItem("hash");
+        localStorage.removeItem("verifyHash");
+        localStorage.removeItem("user");
+    }
 }
 
 export default new AdminAuth();

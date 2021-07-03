@@ -3,11 +3,11 @@
 		<CRow>
 			<CCol md="12">
 				<!-- content -->
-				<CAlert color="danger" :show.sync="showAllert.alert">{{showAllert.alertmessage}}</CAlert>
+				<CAlert :show="alert.status" :color="alert.color" closeButton>{{alert.message}}</CAlert>
 				<WidgetsAdmin
-					:totalPemilih="totalPemilih"
-					:totalKandidat="totalKandidat"
-					:ethereumBalance="ethereumBalance"
+					:totalPemilih="widgetsData.totalPemilih"
+					:totalKandidat="widgetsData.totalKandidat"
+					:ethereumBalance="widgetsData.ethereumBalance"
 				/>
 			</CCol>
 		</CRow>
@@ -17,6 +17,7 @@
 <script>
 	import WidgetsAdmin from "../widgets/WidgetsAdmin";
 	import EthereumService from "../../service/admin/ethereum.service";
+	import AdminService from "../../service/admin/admin.service";
 
 	export default {
 		name: "Dashboard",
@@ -25,52 +26,50 @@
 		},
 		data() {
 			return {
-				totalPemilih: "",
-				totalKandidat: "",
-				ethereumBalance: "",
-				showAllert: {
-					alert: false,
-					alertmessage: ""
+				widgetsData: {
+					totalPemilih: "Memuat...",
+					totalKandidat: "Memuat...",
+					ethereumBalance: "Memuat..."
+				},
+				alert: {
+					color: "",
+					message: "",
+					status: false
 				}
 			};
 		},
-		computed:{
+		computed: {
 			loggedIn() {
 				return this.$store.state.auth.status.loggedIn;
 			},
-			VerifyUser(){
-				return EthereumService.verifyUser(this.$store.state.auth.user.data.access_token);
-			}
-		},
-		methods: {
-			handleLogout() {
-				this.$store.dispatch("auth/logout");
-				setTimeout(() => this.$router.push("/"), 6000);
-			},
-			getDashboardData() {
-				AdminService.getAdminBoard().then(
-					response => {
-						this.totalPemilih = response.data.data.total_pemilih.toString();
-						this.totalKandidat = response.data.data.total_kandidat.toString();
-						this.ethereumBalance = response.data.data.ethereum_balance.toString();
-					},
-					error => {
-						if (error.response.status == 401) {
-							this.showAllert.alert = true;
-							this.showAllert.alertmessage =
-								"Sesi anda telah berakhir, harap login kembali";
-							this.$store.dispatch("auth/removeAuth");
-							setTimeout(() => this.$router.push("/"), 7000);
-						}
-					}
-				);
+			checkHash() {
+				return EthereumService.checkHash();
 			}
 		},
 		mounted() {
-			if(this.loggedIn && this.VerifyUser){
-				this.getAdminBoard();
-			}else{
-				setTimeout(() => this.$router.push('/'),7000);
+			if (this.loggedIn) {
+				if (this.checkHash) {
+					AdminService.getAdminBoard().then(
+						response => {
+							this.widgetsData.totalPemilih = response.data.data.total_pemilih.toString();
+							this.widgetsData.totalKandidat = response.data.data.total_kandidat.toString();
+							this.widgetsData.ethereumBalance = response.data.data.ethereum_balance.toString();
+						},
+						error => {
+							if (error.response.status == 401) {
+								this.alert.color = "warning";
+								this.alert.message = "Sesi anda telah berakhir";
+								this.alert.status = true;
+								this.$store.dispatch("auth/removeauth");
+								setTimeout(() => this.$router.push("/login/administrator"), 5000);
+							}
+						}
+					);
+				} else {
+					this.alert.color = "danger";
+					this.alert.message = "Anda tidak memiliki akses";
+					this.alert.status = true;
+				}
 			}
 		}
 	};
