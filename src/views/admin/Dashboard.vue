@@ -69,6 +69,7 @@
 					this.alert.color = "danger";
 					this.alert.message = "Anda tidak memiliki akses";
 					this.alert.status = true;
+					setTimeout(() => this.$router.push("/"), 3000);
 				}
 			}
 		}
