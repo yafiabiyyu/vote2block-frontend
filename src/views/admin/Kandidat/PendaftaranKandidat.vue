@@ -195,10 +195,7 @@
 						}
 					);
 				} else {
-					this.showContentAndMessage.showContent = false;
-					this.alert.color = "danger";
-					this.alert.message = "Anda tidak memiliki akses";
-					this.alert.status = true;
+					this.$router.push("/login/user");
 				}
 			}
 		}

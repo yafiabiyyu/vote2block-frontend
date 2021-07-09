@@ -100,12 +100,6 @@
 					message: "",
 					status: false
 				},
-				// waktu:{
-				// 	registerstart:null,
-				// 	registerifnis:null,
-				// 	votingstart:null,
-				// 	votingfinis:null
-				// },
 				waktu: new Waktu(null, null, null, null),
 				showContent: true,
 				showMessage: {
@@ -175,11 +169,7 @@
 						}
 					);
 				}else {
-					this.showContent = false;
-					this.alert.color = "danger";
-					this.alert.message = "Anda tidak memiliki akses";
-					this.alert.status = true;
-					setTimeout(() => this.$router.push("/"), 2000);
+					this.$router.push("/login/user");
 				}
 			}
 		}
