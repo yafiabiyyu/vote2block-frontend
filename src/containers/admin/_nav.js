@@ -9,6 +9,12 @@ export default [
         icon:'cil-speedometer'
       },
       {
+        _name:'CSidebarNavItem',
+        name:'Pengaturan Voting',
+        to:'/admin/voting',
+        icon:'cil-settings'
+      },
+      {
         _name:'CSidebarNavDropdown',
         name:'Pemilih & Kandidat',
         icon:'cil-people',

@@ -4,6 +4,7 @@ package-lock.json
 /dist
 /coverage
 .github
+/percoaan
 
 /tests/e2e/reports/
 selenium-debug.log

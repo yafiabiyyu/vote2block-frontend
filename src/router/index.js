@@ -12,22 +12,20 @@ const DataPemilih = () => import('@/views/admin/Pemilih/DataPemilih')
 const DetailPemilih = () => import('@/views/admin/Pemilih/DetailPemilih')
 const PendaftaranPemilih = () => import('@/views/admin/Pemilih/PendaftaranPemilih')
 const DataKandidat = () => import('@/views/admin/Kandidat/DataKandidat')
+const PendaftaranKandidat = () => import('@/views/admin/Kandidat/PendaftaranKandidat')
+const DetailKandidat = () => import('@/views/admin/Kandidat/DetailKandidat')
+const VotingTime = () => import('@/views/admin/VotingTime')
 
 // Pemilih Views
 const PemilihLogin = () => import('@/views/pemilih/LoginForm')
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'hash', // https://router.vuejs.org/api/#mode
-  linkActiveClass: 'active',
-  scrollBehavior: () => ({ y: 0 }),
-  routes: configRoutes()
-})
-
-function configRoutes () {
-  return [
-    //Route login untuk pemilih
+const router = new Router({
+  mode:'hash',
+  linkActiveClass:'active',
+  scrollBehavior: () => ({y:0}),
+  routes:[
     {
       path:'/',
       redirect:'/login',
@@ -103,11 +101,48 @@ function configRoutes () {
               path:'data',
               name:'Data',
               component:DataKandidat
+            },
+            {
+              path:'detail/:id',
+              name:'Detail',
+              component:DetailKandidat
+            },
+            {
+              path:'pendaftaran',
+              name:'Pendaftaran',
+              component:PendaftaranKandidat
+            }
+          ]
+        },
+        {
+          path:'voting',
+          redirect:'/admin/voting/setup',
+          name:'Voting',
+          component:{
+            render(c) {return c('router-view')}
+          },
+          children:[
+            {
+              path:'setup',
+              name:'Setup',
+              component:VotingTime
             }
           ]
         }
       ]
     }
   ]
-}
+});
 
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/login/user', '/login/administrator'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+  if(authRequired && !loggedIn){
+    next('/');
+  }else{
+    next();
+  }
+});
+
+export default router;
