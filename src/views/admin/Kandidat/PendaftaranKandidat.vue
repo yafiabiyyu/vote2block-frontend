@@ -80,7 +80,7 @@
 	import Kandidat from "../../../model/admin/kandidat";
 	import AdminService from "../../../service/admin/admin.service";
 	import EthereumService from "../../../service/admin/ethereum.service";
-	import votingService from "../../../service/voting.service";
+	import VotingService from "../../../service/voting.service";
 	export default {
 		name: "PendaftaranKandidat",
 		beforeRouterEnter(to, from, next) {
@@ -175,7 +175,7 @@
 		mounted() {
 			if (this.loggedIn) {
 				if (this.checkHash) {
-					votingService.getRegisterStatus().then(
+					VotingService.getRegisterStatus().then(
 						response => {
 							if (response.data.status == "Gagal") {
 								this.showContentAndMessage.showContent = false;

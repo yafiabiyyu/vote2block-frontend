@@ -101,7 +101,7 @@
 					status: false
 				},
 				waktu: new Waktu(null, null, null, null),
-				showContent: true,
+				showContent: false,
 				showMessage: {
 					message:"",
 					status:false
@@ -129,19 +129,19 @@
 							this.alert.color = "info";
 							this.alert.message = response.data.message;
 							this.alert.status = true;
-							setTimeout(() => this.$router.push('/admin'), 2000);
+							setTimeout(() => this.$router.push('/admin'), 5000);
 						} else {
 							this.alert.color = "warning";
 							this.alert.message = response.data.message;
 							this.alert.status = true;
-							setTimeout(() => this.$router.go(0), 2000);
+							setTimeout(() => this.$router.go(0), 5000);
 						}
 					},
 					error => {
 						this.alert.color = "danger";
 						this.alert.message = error.data.message;
 						this.alert.status = true;
-						setTimeout(() => this.$router.go(0), 2000);
+						setTimeout(() => this.$router.go(0), 5000);
 					}
 				);
 			}
@@ -155,6 +155,9 @@
 								this.showContent = false;
 								this.showMessage.message = response.data.message;
 								this.showMessage.status=true;
+								setTimeout(() => this.$router.push("/admin"), 5000);
+							}else{
+								this.showContent = true;
 							}
 						},
 						error => {
