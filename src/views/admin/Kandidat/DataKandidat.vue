@@ -33,7 +33,6 @@
 </template>
 
 <script>
-	import kandidatData from "./KandidatDumy";
 	import EthereumService from "../../../service/admin/ethereum.service";
 	import AdminService from "../../../service/admin/admin.service";
 	export default {
