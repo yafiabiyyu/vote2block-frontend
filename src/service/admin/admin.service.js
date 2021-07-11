@@ -65,5 +65,31 @@ class AdminService {
         };
         return axios(config);
     }
+
+    getPemilihData() {
+        return axios.get(base_url + "/admin/data/pemilih", {
+            headers: authHeader(),
+        });
+    }
+
+    registerPemilih(pemilih) {
+        return axios.post(
+            base_url + "/admin/pendaftaran/pemilih",
+            {
+                pemilih_id: pemilih.pemilih_id,
+                nama_lengkap: pemilih.nama_lengkap,
+                tgl_lahir: pemilih.tgl_lahir,
+                contact: pemilih.contact,
+                alamat: pemilih.alamat,
+            },
+            { headers: authHeader() }
+        );
+    }
+
+    getSinglePemilih(id) {
+        return axios.get(base_url + "/admin/data/pemilih/" + id, {
+            headers: authHeader(),
+        });
+    }
 }
 export default new AdminService();
