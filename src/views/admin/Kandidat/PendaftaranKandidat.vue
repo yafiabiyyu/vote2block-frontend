@@ -97,7 +97,7 @@
 					status: false
 				},
 				showContentAndMessage: {
-					showContent: true,
+					showContent: false,
 					showMessage: false,
 					message: ""
 				},
@@ -141,19 +141,19 @@
 										this.alert.color="info";
 										this.alert.message = register_response.data.message;
 										this.alert.status = true;
-										setTimeout(() => this.$router.push('/admin/kandidat'), 2000);
+										setTimeout(() => this.$router.push('/admin/kandidat'), 5000);
 									}else{
 										this.alert.color="warning";
 										this.alert.message=register_response.data.message;
 										this.alert.status=true;
-										setTimeout(() => this.$router.go(0), 2000);
+										setTimeout(() => this.$router.go(0), 5000);
 									}
 								},
 								register_error => {
 									this.alert.color="danger";
 									this.alert.message=register_error.data.message;
 									this.alert.status=true;
-									setTimeout(() => this.$router.go(0), 2000)
+									setTimeout(() => this.$router.go(0), 5000)
 								}
 							);
 						}
@@ -181,6 +181,8 @@
 								this.showContentAndMessage.showContent = false;
 								this.showContentAndMessage.showMessage = true;
 								this.showContentAndMessage.message = response.data.message;
+							}else{
+								this.showContentAndMessage.showContent = true;
 							}
 						},
 						error => {

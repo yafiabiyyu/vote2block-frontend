@@ -1,6 +1,7 @@
 <template>
 	<CRow>
 		<CCol md="12">
+			<CAlert :show="alert.status" :color="alert.color" closeButton>{{alert.message}}</CAlert>
 			<CCard>
 				<CCardHeader>Form Pendaftaran</CCardHeader>
 				<CCardBody>
@@ -107,19 +108,19 @@
 							this.alert.color="info";
 							this.alert.message=response.data.message;
 							this.alert.status=true;
-							setTimeout(() => this.$router.push('/admin/pemilih'), 2000);
+							setTimeout(() => this.$router.push('/admin/pemilih'), 5000);
 						}else{
 							this.alert.color="warning";
 							this.alert.message = response.data.message;
 							this.alert.status = true;
-							setTimeout(() => this.$router.go(0), 2000);
+							setTimeout(() => this.$router.go(0), 5000);
 						}
 					},
 					error => {
 						this.alert.color="danger";
 						this.alert.message=error.data.message;
 						this.alert.status=true;
-						setTimeout(() => this.$router.go(0), 2000);
+						setTimeout(() => this.$router.go(0), 5000);
 					}
 				)
 			}

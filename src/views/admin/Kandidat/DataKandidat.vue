@@ -2,7 +2,7 @@
 	<div>
 		<CAlert :show="alert.status" :color="alert.color" closeButton>{{alert.message}}</CAlert>
 		<div class="buttonRegister">
-			<CButton color="primary" @click="registerButton">
+			<CButton color="info" @click="registerButton">
 				<CIcon name="cil-user-plus" />&nbsp;Pendaftaran
 			</CButton>
 		</div>
