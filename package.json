@@ -38,6 +38,8 @@
     "@coreui/vue": "^3.2.9",
     "@coreui/vue-chartjs": "^1.0.6",
     "axios": "^0.21.1",
+    "d3": "^7.0.0",
+    "d3-scale-chromatic": "^3.0.0",
     "dotenv": "^8.6.0",
     "v-calendar": "^2.3.0",
     "vee-validate": "^3.4.10",
