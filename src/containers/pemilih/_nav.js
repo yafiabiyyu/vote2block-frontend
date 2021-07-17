@@ -7,6 +7,12 @@ export default [
         name:'Dashboard',
         to:'/dashboard',
         icon:'cil-speedometer'
+      },
+      {
+        _name:'CSidebarNavItem',
+        name:'Quick Count',
+        to:'/pemilih/quick-count',
+        icon:'cil-speedometer'
       }
     ]
   }
