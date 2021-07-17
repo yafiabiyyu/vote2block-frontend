@@ -6,6 +6,12 @@
 				<CCard bodyWrapper v-show="messageCard.status">
 					<CCardText>{{messageCard.message}}</CCardText>
 				</CCard>
+				<CCard bodyWrapper v-show="transactionCard.status">
+					<CCardText>
+						{{transactionCard.message}}, dapat dilihat pada halaman
+						<CLink href="transactionCard.tx_hash" target="_blank">Etherscan Ropsten</CLink>
+					</CCardText>
+				</CCard>
 			</CCol>
 		</CRow>
 		<div v-show="kandidatCard.kandidatList">
@@ -42,7 +48,7 @@
 		</div>
 		<div v-show="kandidatCard.kandidatSingle">
 			<CRow alignHorizontal="center">
-				<CCol :col="4">
+				<CCol col>
 					<CCard>
 						<!-- <CCardImg
 							:src="kandidats.image_url"
@@ -105,6 +111,11 @@
 				messageCard: {
 					status: false,
 					message: ""
+				},
+				transactionCard:{
+					status:false,
+					message:"",
+					tx_hash:""
 				}
 			};
 		},
@@ -147,25 +158,35 @@
 					}
 				});
 			},
-			getKandidatDipilih() {
+			getKandidatDipilih(){
 				VotingService.getKandidatDipilih().then(
-					terpilihResponse => {
-						this.kandidatTerpilih.nomor_urut = terpilihResponse.data.nomor_urut;
-						this.kandidatTerpilih.nama = terpilihResponse.data.nama;
-						this.kandidatTerpilih.visi = terpilihResponse.data.visi;
-						this.kandidatTerpilih.misi = terpilihResponse.data.misi;
-						this.kandidatTerpilih.image_url = terpilihResponse.data.image_url;
-						this.kandidatCard.kandidatSingle = true;
+					response => {
+						if(response.data.status == "Gagal"){
+							this.transactionCard.status = true;
+							this.transactionCard.message = response.data.message;
+							this.transactionCard.tx_hash = response.data.tx_hash;
+							console.log(this.transactionCard.tx_hash)
+						}else{
+							this.alert.color="info";
+							this.alert.message="Berikut ini adalah kandidat yang anda pilih";
+							this.alert.status = true;
+							this.kandidatTerpilih.nomor_urut = response.data.data.nomor_urut;
+							this.kandidatTerpilih.nama = response.data.data.nama;
+							this.kandidatTerpilih.visi = response.data.data.visi;
+							this.kandidatTerpilih.misi = response.data.data.misi;
+							this.kandidatTerpilih.image_url = response.data.data.image_url;
+							this.kandidatCard.kandidatSingle = true;
+						}
 					},
-					terpilihError => {
-						if (terpilihError.response.status == 401) {
+					error => {
+						if (error.response.status == 401) {
 							this.alert.color = "danger";
 							this.alert.message = "Sesi anda telah berakhir";
 							this.alert.status = true;
 							setTimeout(() => this.$router.push("/"), 5000);
 						}
 					}
-				);
+				)
 			}
 		},
 		mounted() {
@@ -199,27 +220,7 @@
 										}
 									);
 								} else {
-									// Menampilkan data kandidat yang telah di pilih
-									VotingService.getKandidatDipilih().then(
-										terpilihResponse => {
-											this.kandidatTerpilih.nomor_urut =
-												terpilihResponse.data.nomor_urut;
-											this.kandidatTerpilih.nama = terpilihResponse.data.nama;
-											this.kandidatTerpilih.visi = terpilihResponse.data.visi;
-											this.kandidatTerpilih.misi = terpilihResponse.data.misi;
-											this.kandidatTerpilih.image_url =
-												terpilihResponse.data.image_url;
-											this.kandidatCard.kandidatSingle = true;
-										},
-										terpilihError => {
-											if (terpilihError.response.status == 401) {
-												this.alert.color = "danger";
-												this.alert.message = "Sesi anda telah berakhir";
-												this.alert.status = true;
-												setTimeout(() => this.$router.push("/"), 5000);
-											}
-										}
-									);
+									this.getKandidatDipilih();
 								}
 							},
 							hakError => {
@@ -233,24 +234,7 @@
 							}
 						);
 					} else {
-						VotingService.getKandidatDipilih().then(
-							terpilihResponse => {
-								this.kandidatTerpilih.nomor_urut = terpilihResponse.data.nomor_urut;
-								this.kandidatTerpilih.nama = terpilihResponse.data.nama;
-								this.kandidatTerpilih.visi = terpilihResponse.data.visi;
-								this.kandidatTerpilih.misi = terpilihResponse.data.misi;
-								this.kandidatTerpilih.image_url = terpilihResponse.data.image_url;
-								this.kandidatCard.kandidatSingle = true;
-							},
-							terpilihError => {
-								if (terpilihError.response.status == 401) {
-									this.alert.color = "danger";
-									this.alert.message = "Sesi anda telah berakhir";
-									this.alert.status = true;
-									setTimeout(() => this.$router.push("/"), 5000);
-								}
-							}
-						);
+						this.getKandidatDipilih();
 					}
 				} else {
 					this.$router.push("/login/administrator");
