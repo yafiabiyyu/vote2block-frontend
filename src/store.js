@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { auth } from './auth.module'
+import { vote } from './vote.module'
 Vue.use(Vuex)
 
 const state = {
@@ -26,6 +27,7 @@ export default new Vuex.Store({
   state,
   mutations,
   modules:{
-    auth
+    auth,
+    vote,
   }
 })
