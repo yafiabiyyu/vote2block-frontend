@@ -4,7 +4,7 @@ const initialState = {status:{voted:false}}
 export const vote = {
     namespaced: true,
     state: initialState,
-    action:{
+    actions:{
         voted({ commit }){
             commit('voteSuccess')
         },
@@ -14,10 +14,10 @@ export const vote = {
     },
     mutations:{
         voteSuccess(state){
-            state.status.votes = true;
+            state.status.voted = true;
         },
         voteRemove(state){
-            state.status.votes = false;
+            state.status.voted = false;
         }
     }
 }

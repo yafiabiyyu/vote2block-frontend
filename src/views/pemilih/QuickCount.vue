@@ -32,7 +32,7 @@
 				alert: {
 					color: "info",
 					message: "test",
-					status: true
+					status: false
 				},
 				chartData:{
 					dataset:null,

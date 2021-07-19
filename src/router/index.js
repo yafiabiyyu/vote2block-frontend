@@ -20,6 +20,7 @@ const VotingTime = () => import('@/views/admin/VotingTime')
 const PemilihLogin = () => import('@/views/pemilih/LoginForm')
 const PemilihDashboard = () => import('@/views/pemilih/Dashboard');
 const QuickCount = () => import ('@/views/pemilih/QuickCount');
+const HasilPemilihan = () => import('@/views/pemilih/HasilPemilihan')
 
 Vue.use(Router)
 
@@ -136,6 +137,7 @@ const router = new Router({
     {
       path:'/pemilih',
       redirect:'/pemilih/dashboard',
+      name:'Home',
       component:TheContainerPemilih,
       children:[
         {
@@ -147,6 +149,11 @@ const router = new Router({
           path:'quick-count',
           name:'Quick Count',
           component:QuickCount
+        },
+        {
+          path:'hasil-pemilihan',
+          name:'Hasil Pemilihan',
+          component:HasilPemilihan
         }
       ]
     }

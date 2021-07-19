@@ -127,7 +127,8 @@
 				return EthereumService.checkHash();
 			},
 			checkVote() {
-				return this.$store.state.vote.status.votes;
+				console.log(this.$store.state.vote.status.voted);
+				return this.$store.state.vote.status.voted;
 			}
 		},
 		methods: {
