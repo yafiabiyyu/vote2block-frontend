@@ -55,7 +55,7 @@
 					</CCardBody>
 				</div>
 				<CCardFooter>
-					<CButton color="primary" @click="goBack">Kembali</CButton>
+					<CButton color="info" @click="goBack">Kembali</CButton>
 				</CCardFooter>
 			</CCard>
 		</CCol>

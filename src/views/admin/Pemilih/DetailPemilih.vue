@@ -41,7 +41,7 @@
 							</CRow>
 							<CRow>
 								<CCol>
-									<CButton type="button" @click="goBack" class="CButton" color="warning">Kembali</CButton>
+									<CButton type="button" @click="goBack" class="CButton" color="info">Kembali</CButton>
 								</CCol>
 								<CCol :col="3"></CCol>
 							</CRow>

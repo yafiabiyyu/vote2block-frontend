@@ -5,7 +5,19 @@ export default [
       {
         _name:'CSidebarNavItem',
         name:'Dashboard',
-        to:'/dashboard',
+        to:'/pemilih/dashboard',
+        icon:'cil-speedometer'
+      },
+      {
+        _name:'CSidebarNavItem',
+        name:'Quick Count',
+        to:'/pemilih/quick-count',
+        icon:'cil-speedometer'
+      },
+      {
+        _name:'CSidebarNavItem',
+        name:'Hasil Pemilihan',
+        to:'/pemilih/hasil-pemilihan',
         icon:'cil-speedometer'
       }
     ]
