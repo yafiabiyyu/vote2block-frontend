@@ -22,10 +22,13 @@
     >
       <strong>Settings</strong>
     </CDropdownHeader>
-    <CDropdownItem>
+    <CDropdownItem @click="profilePemilih">
       <CIcon name="cil-user" /> Profile
     </CDropdownItem>
-    <CDropdownItem>
+    <CDropdownItem @click="updatePassword">
+      <CIcon name="cil-shield-alt" /> Update Password
+    </CDropdownItem>
+    <CDropdownItem @click="logout">
       <CIcon name="cil-lock-locked" /> Logout
     </CDropdownItem>
   </CDropdown>
@@ -37,6 +40,18 @@ export default {
   data () {
     return { 
       itemsCount: 42
+    }
+  },
+  methods:{
+    profilePemilih(){
+      this.$router.push('/pemilih/data')
+    },
+    logout(){
+      this.$store.dispatch("auth/removeauth");
+      setTimeout(() => this.$router.push('/'),5000);
+    },
+    updatePassword(){
+      this.$router.push('/pemilih/password')
     }
   }
 }

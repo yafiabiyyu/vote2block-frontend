@@ -79,7 +79,7 @@
 							</CRow>
 						</CForm>
 					</div>
-					<p :show="showMessage">{{showMessage.message}}</p>
+					<p :show="showMessage.status">{{showMessage.message}}</p>
 				</CCardBody>
 			</CCard>
 		</CCol>

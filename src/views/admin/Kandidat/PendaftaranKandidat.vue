@@ -28,7 +28,7 @@
 									<CInput type="text" v-model="contact.phone" label="No Telephone" />
 								</CCol>
 								<CCol :col="6">
-									<CInput type="text" v-model="contact.email" label="E-mail" />
+									<CInput type="text" v-model="contact.email" label="Email" />
 								</CCol>
 							</CRow>
 							<CRow>

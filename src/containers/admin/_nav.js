@@ -15,21 +15,16 @@ export default [
         icon:'cil-settings'
       },
       {
-        _name:'CSidebarNavDropdown',
-        name:'Pemilih & Kandidat',
+        _name:'CSidebarNavItem',
+        name:'Pemilih',
         icon:'cil-people',
-        items:[
-          {
-            _name:'CSidebarNavItem',
-            name:'Pemilih',
-            to:'/admin/pemilih',
-          },
-          {
-            _name:'CSidebarNavItem',
-            name:'Kandidat',
-            to:'/admin/kandidat',
-          }
-        ]
+        to:'/admin/pemilih',
+      },
+      {
+        _name:'CSidebarNavItem',
+        name:'Kandidat',
+        icon:'cil-people',
+        to:'/admin/kandidat',
       }
     ]
   }

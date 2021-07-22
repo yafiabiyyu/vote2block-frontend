@@ -20,7 +20,7 @@
 							</CRow>
 							<CRow>
 								<CCol :col="6">
-									<CInput v-model="contact.email" type="text" label="Alamat Email"/>
+									<CInput v-model="contact.email" type="text" label="Email"/>
 								</CCol>
 								<CCol :col="6">
 									<CInput v-model="contact.phone" type="text" label="No Telephone"/>

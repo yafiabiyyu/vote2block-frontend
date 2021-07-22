@@ -184,6 +184,7 @@
 							this.alert.color = "danger";
 							this.alert.message = "Sesi anda telah berakhir";
 							this.alert.status = true;
+							this.$store.dispatch("auth/removeauth");
 							setTimeout(() => this.$router.push("/"), 5000);
 						}
 					}
@@ -230,6 +231,7 @@
 									this.alert.color = "danger";
 									this.alert.message = "Sesi anda telah berakhir";
 									this.alert.status = true;
+									this.$store.dispatch("auth/removeauth");
 									setTimeout(() => this.$router.push("/"), 5000);
 								}
 							}

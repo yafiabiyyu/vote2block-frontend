@@ -3,7 +3,7 @@
 		<CCol col="12">
 			<CAlert :show="alert.status" :color="alert.color" closeButton>{{alert.message}}</CAlert>
 			<CCard>
-				<CCardHeader>Data</CCardHeader>
+				<CCardHeader>Data Pemilih</CCardHeader>
 				<div>
 					<CCardBody>
 						<div v-if="pemilih">
@@ -40,10 +40,9 @@
 								</CCol>
 							</CRow>
 							<CRow>
-								<CCol>
-									<CButton type="button" @click="goBack" class="CButton" color="info">Kembali</CButton>
+								<CCol :col="12">
+									<CInput v-model="pemilih.ethereum_address" type="text" label="Alamat Ethereum" />
 								</CCol>
-								<CCol :col="3"></CCol>
 							</CRow>
 						</div>
 					</CCardBody>
@@ -54,18 +53,12 @@
 </template>
 
 <script>
-	import AdminService from "../../../service/admin/admin.service";
-	import EthereumService from "../../../service/admin/ethereum.service";
+	import PemilihService from "../../service/pemilih/pemilih.service";
+	import EthereumService from "../../service/pemilih/ethereum.service";
 	export default {
 		name: "DetailPemilih",
-		beforeRouteEnter(to, from, next) {
-			next(vm => {
-				vm.userOpened = from.fullPath.includes("pemilih");
-			});
-		},
 		data() {
 			return {
-				userOpened: null,
 				alert: {
 					color: "",
 					message: "",
@@ -74,13 +67,6 @@
 				showContent: true,
 				pemilih: null
 			};
-		},
-		methods: {
-			goBack() {
-				this.userOpened
-					? this.$router.go(-1)
-					: this.$router.push("/pemilih");
-			}
 		},
 		computed: {
 			loggedIn() {
@@ -93,7 +79,7 @@
 		mounted() {
 			if (this.loggedIn) {
 				if (this.checkHash) {
-					AdminService.getSinglePemilih(this.$route.params.id).then(
+					PemilihService.getdataPemilih().then(
 						response => {
 							this.pemilih = response.data;
 						},
@@ -104,12 +90,12 @@
 								this.alert.message = "Sesi anda telah berakhir";
 								this.alert.status = true;
 								this.$store.dispatch("auth/removeauth");
-								setTimeout(() => this.router.push("/login/administrator"), 5000);
+								setTimeout(() => this.router.push("/login/user"), 5000);
 							}
 						}
 					);
 				} else {
-					this.$router.push("/login/user");
+					this.$router.push("/login/administrator");
 				}
 			}
 		}

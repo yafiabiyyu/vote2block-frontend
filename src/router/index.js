@@ -20,7 +20,9 @@ const VotingTime = () => import('@/views/admin/VotingTime')
 const PemilihLogin = () => import('@/views/pemilih/LoginForm')
 const PemilihDashboard = () => import('@/views/pemilih/Dashboard');
 const QuickCount = () => import ('@/views/pemilih/QuickCount');
-const HasilPemilihan = () => import('@/views/pemilih/HasilPemilihan')
+const HasilPemilihan = () => import('@/views/pemilih/HasilPemilihan');
+const PemilihData = () => import('@/views/pemilih/DataPemilih');
+const UpdatePassword = () => import('@/views/pemilih/UpdatePassword')
 
 Vue.use(Router)
 
@@ -154,6 +156,16 @@ const router = new Router({
           path:'hasil-pemilihan',
           name:'Hasil Pemilihan',
           component:HasilPemilihan
+        },
+        {
+          path:'data',
+          name:'Data Pemilih',
+          component:PemilihData
+        },
+        {
+          path:'password',
+          name:'Update Password',
+          component:UpdatePassword
         }
       ]
     }
