@@ -7,9 +7,11 @@
 					<CCardText>{{messageCard.message}}</CCardText>
 				</CCard>
 				<CCard bodyWrapper v-show="transactionCard.status">
+					<CCardTitle>Bukti Pemilihan</CCardTitle>
+					<CCardText><strong>Alamat Ethereum : {{transactionCard.ethereum_address}}</strong></CCardText>
 					<CCardText>
-						{{transactionCard.message}}, dapat dilihat pada halaman
-						<CLink href="transactionCard.tx_hash" target="_blank">Etherscan Ropsten</CLink>
+						Dapat dilihat pada
+						<CLink v-bind:href="''+transactionCard.tx_hash+''" target="_blank">Etherscan Ropsten</CLink>
 					</CCardText>
 				</CCard>
 			</CCol>
@@ -113,8 +115,8 @@
 					message: ""
 				},
 				transactionCard:{
-					status:false,
-					message:"",
+					status:true,
+					ethereum_address:"",
 					tx_hash:""
 				}
 			};
@@ -164,9 +166,8 @@
 					response => {
 						if(response.data.status == "Gagal"){
 							this.transactionCard.status = true;
-							this.transactionCard.message = response.data.message;
+							this.transactionCard.ethereum_address = response.data.ethereum_address;
 							this.transactionCard.tx_hash = response.data.tx_hash;
-							console.log(this.transactionCard.tx_hash)
 						}else{
 							this.alert.color="info";
 							this.alert.message="Berikut ini adalah kandidat yang anda pilih";
@@ -177,6 +178,10 @@
 							this.kandidatTerpilih.misi = response.data.data.misi;
 							this.kandidatTerpilih.image_url = response.data.data.image_url;
 							this.kandidatCard.kandidatSingle = true;
+
+							this.transactionCard.status = true;
+							this.transactionCard.ethereum_address = response.data.ethereum_address;
+							this.transactionCard.tx_hash = response.data.tx_hash;
 						}
 					},
 					error => {
