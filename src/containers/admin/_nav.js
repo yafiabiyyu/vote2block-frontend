@@ -10,7 +10,7 @@ export default [
       },
       {
         _name:'CSidebarNavItem',
-        name:'Pengaturan Voting',
+        name:'Pengaturan Waktu',
         to:'/admin/voting',
         icon:'cil-settings'
       },

@@ -115,7 +115,7 @@
 					message: ""
 				},
 				transactionCard:{
-					status:true,
+					status:false,
 					ethereum_address:"",
 					tx_hash:""
 				}
@@ -129,8 +129,8 @@
 				return EthereumService.checkHash();
 			},
 			checkVote() {
-				console.log(this.$store.state.vote.status.voted);
-				return this.$store.state.vote.status.voted;
+				console.log(this.$store.state.vote.voted);
+				return this.$store.state.vote.voted;
 			}
 		},
 		methods: {

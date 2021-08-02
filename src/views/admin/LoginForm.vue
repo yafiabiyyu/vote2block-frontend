@@ -49,7 +49,7 @@
 								<h2>Vote2Block</h2>
 								<p
 									style="text-align='center'"
-								>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dignissimos enim quisquam velit, eum blanditiis, quasi laudantium illo odit asperiores recusandae expedita, laborum quaerat maxime?</p>
+								>Voting Sistem Menggunakan <br> Smart-Contract</p>
 							</CCardBody>
 						</CCard>
 					</CCardGroup>

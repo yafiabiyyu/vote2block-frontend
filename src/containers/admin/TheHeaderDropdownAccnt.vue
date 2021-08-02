@@ -25,7 +25,7 @@
     <CDropdownItem>
       <CIcon name="cil-user" /> Profile
     </CDropdownItem>
-    <CDropdownItem>
+    <CDropdownItem @click="logout">
       <CIcon name="cil-lock-locked" /> Logout
     </CDropdownItem>
   </CDropdown>
@@ -37,6 +37,12 @@ export default {
   data () {
     return { 
       itemsCount: 42
+    }
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch("auth/removeauth");
+      setTimeout(() => this.$router.push('/'),5000);
     }
   }
 }

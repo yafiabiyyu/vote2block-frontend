@@ -103,8 +103,8 @@
 				waktu: new Waktu(null, null, null, null),
 				showContent: false,
 				showMessage: {
-					message:"",
-					status:false
+					message: "",
+					status: false
 				}
 			};
 		},
@@ -114,6 +114,10 @@
 			},
 			checkHash() {
 				return EthereumService.checkHash();
+			},
+			timeStatus() {
+				console.log(this.$store.state.vote.timesetup);
+				return this.$store.state.vote.timesetup;
 			}
 		},
 		methods: {
@@ -129,7 +133,8 @@
 							this.alert.color = "info";
 							this.alert.message = response.data.message;
 							this.alert.status = true;
-							setTimeout(() => this.$router.push('/admin'), 5000);
+							this.$store.dispatch("vote/setTime");
+							setTimeout(() => this.$router.push("/admin"), 5000);
 						} else {
 							this.alert.color = "warning";
 							this.alert.message = response.data.message;
@@ -149,29 +154,39 @@
 		mounted() {
 			if (this.loggedIn) {
 				if (this.checkHash) {
-					VotingService.getStatusWaktu().then(
-						response => {
-							if (response.data.status == "Gagal") {
-								this.showContent = false;
-								this.showMessage.message = response.data.message;
-								this.showMessage.status=true;
-								setTimeout(() => this.$router.push("/admin"), 5000);
-							}else{
-								this.showContent = true;
+					if (!this.timeStatus) {
+						VotingService.getStatusWaktu().then(
+							response => {
+								if (response.data.status == "Gagal") {
+									this.showContent = false;
+									this.showMessage.message = response.data.message;
+									this.showMessage.status = true;
+									setTimeout(() => this.$router.push("/admin"), 5000);
+								} else {
+									this.showContent = true;
+								}
+							},
+							error => {
+								if (error.response.status == 401) {
+									this.showContent = false;
+									this.alert.color = "danger";
+									this.alert.message = "Sesi anda telah berakhir";
+									this.alert.status = true;
+									this.$store.dispatch("auth/removeauth");
+									setTimeout(
+										() => this.$router.push("/login/administrator"),
+										5000
+									);
+								}
 							}
-						},
-						error => {
-							if (error.response.status == 401) {
-								this.showContent = false;
-								this.alert.color = "danger";
-								this.alert.message = "Sesi anda telah berakhir";
-								this.alert.status = true;
-								this.$store.dispatch("auth/removeauth");
-								setTimeout(() => this.$router.push("/login/administrator"), 5000);
-							}
-						}
-					);
-				}else {
+						);
+					} else {
+						this.showContent = false;
+						this.showMessage.message = "Waktu telah ditetapkan";
+						this.showMessage.status = true;
+						setTimeout(() => this.$router.push("/admin"), 5000);
+					}
+				} else {
 					this.$router.push("/login/user");
 				}
 			}

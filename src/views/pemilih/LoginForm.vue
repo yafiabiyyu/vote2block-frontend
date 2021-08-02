@@ -8,8 +8,7 @@
 						<CCard class="p-4">
 							<CCardBody>
 								<CForm @submit.stop.prevent="handleLogin">
-									<h1>Login</h1>
-									<p class="text-muted">Sign In to your account</p>
+									<h1>Pemilih Login</h1>
 									<CInput
 										placeholder="Username"
 										v-model="user.username"
@@ -51,7 +50,7 @@
 								<h2>Vote2Block</h2>
 								<p
 									style="text-align='center'"
-								>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dignissimos enim quisquam velit, eum blanditiis, quasi laudantium illo odit asperiores recusandae expedita, laborum quaerat maxime?</p>
+								>Voting Sistem Menggunakan <br/>Smart-Contract</p>
 							</CCardBody>
 						</CCard>
 					</CCardGroup>
