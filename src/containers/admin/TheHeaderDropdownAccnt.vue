@@ -22,9 +22,6 @@
     >
       <strong>Settings</strong>
     </CDropdownHeader>
-    <CDropdownItem>
-      <CIcon name="cil-user" /> Profile
-    </CDropdownItem>
     <CDropdownItem @click="logout">
       <CIcon name="cil-lock-locked" /> Logout
     </CDropdownItem>
